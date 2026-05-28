@@ -4,9 +4,8 @@ A full-stack Customer Support CRM application built as a hiring assignment for D
 
 ## 🚀 Tech Stack
 - **Backend:** Node.js, Express
-- **Database:** SQLite (using better-sqlite3)
+- **Database:** SQLite 
 - **Frontend:** React, Vite, Tailwind CSS
-- **Deployment:** Render (recommended)
 
 ## 📁 Folder Structure
 - `backend/` - Node.js Express server and SQLite database setup.
