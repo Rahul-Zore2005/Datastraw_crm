@@ -1,69 +1,73 @@
-# Datastraw Support CRM
+# Datastraw CRM
 
-A full-stack Customer Support CRM application built as a hiring assignment for Datastraw Technologies.
+A modern, fast, and lightweight Customer Relationship Management (CRM) dashboard designed to manage support tickets, track resolutions, and maintain internal team notes.
 
-## 🚀 Tech Stack
-- **Backend:** Node.js, Express
-- **Database:** SQLite 
-- **Frontend:** React, Vite, Tailwind CSS
+## 🎯 Project Overview
 
-## 📁 Folder Structure
-- `backend/` - Node.js Express server and SQLite database setup.
-- `frontend/` - React application styled with Tailwind CSS.
+Datastraw CRM was built with a focus on **speed**, **data integrity**, and clean **UX/UI**. It allows support teams to log customer issues, dynamically filter ticket statuses, and collaborate on resolutions through timestamped internal notes.
 
-## ⚙️ Setup Instructions
+## ✨ Key Features
 
-### 1. Clone & Install
+* **Complete Ticket Lifecycle Management:** Create, view, update, and manage support tickets seamlessly.
+* **Smart Dashboard & Analytics:** Real-time summary stats (Total, Open, In-Progress, Closed) with dynamic searching and category filtering.
+* **Internal Auditing & Notes:** Support agents can add private, timestamped notes to specific tickets to track progress without altering the original customer description.
+* **Strict Localization:** Enforced standard `en-GB` (`dd/mm/yyyy`) date formatting with 12-hour precise timestamps across the application to ensure data consistency.
+* **Modern UI Design:** A meticulously crafted, responsive UI built with Tailwind CSS, utilizing flex-box for dynamic wrapping. 
+* **Instant Feedback:** Integrated push notifications (React Hot Toast) for clean, non-intrusive user alerts during API operations.
+
+## 🛠️ Tech Stack
+
+**Frontend**
+* **Core:** React 19, Vite (for ultra-fast HMR and optimized builds)
+* **Routing state:** React Router v7
+* **Styling:** Tailwind CSS (Utility-first)
+* **HTTP:** Axios
+
+**Backend**
+* **Core:** Node.js, Express.js
+* **Database:** SQLite3 (`better-sqlite3` driver for rapid, synchronous, file-based storage)
+* **Middleware:** CORS, Express JSON parser
+
+## 🧠 Architectural Decisions 
+
+1. **Proxy Local Networking:** In order to get around the CORS issue, during the development process, the frontend uses proxy configurations in `vite.config.js` to send requests to the Express server at `http://localhost:5000/api/*`.
+2. **Sanitized Queries:** The backend makes use of prepared statements using `better-sqlite3.db.prepare()`. This ensures that the input queries are always sanitized, providing protection from any potential SQL injection attacks.
+3. **Efficient Data Visualization:** The React frontend makes use of `useMemo` hooks for rendering the tickets in their sorted form. This ensures that the component is only rendered when there are changes in the underlying state.
+4. **Data Structure Consistency:** There is normalization within the local SQLite database to keep `tickets` and `notes` separated by strict foreign key relationships through `ticket_id`.
+
+## 🚀 Getting Started
+
+### Prerequisites
+* [Node.js](https://nodejs.org/) installed on your machine.
+
+### 1. Initialize the Backend
+Open your terminal and navigate to the backend directory:
 ```bash
-git clone https://github.com/YOUR_USERNAME/datastraw-crm.git
-cd datastraw-crm
-
-# Install backend dependencies
 cd backend
 npm install
-
-# Install frontend dependencies
-cd ../frontend
-npm install
+npm run start
 ```
+The Express server will start on http://localhost:5000. The SQLite database (crm.db) will auto-generate upon initialization.
 
-### 2. Run Locally
-
-**Start the Backend (Terminal 1):**
-```bash
-cd backend
-node server.js
-```
-*Server runs on http://localhost:5000*
-
-**Start the Frontend (Terminal 2):**
+### 2. Initialize the Frontend
+Open a new terminal window and navigate to the frontend directory:
 ```bash
 cd frontend
+npm install
 npm run dev
 ```
-*App runs on http://localhost:5173*
 
-*(Note: The frontend uses a Vite proxy in development so API calls to `/api/...` are forwarded to the backend automatically).*
+## 📂 Core Folder Structure
 
-## 📡 API Endpoints
-
-| Method | Path | Description |
-|---|---|---|
-| `POST` | `/api/tickets` | Create a new ticket. Body: `{ customer_name, customer_email, subject, description }` |
-| `GET` | `/api/tickets` | List all tickets. Optional query: `?status=Open&search=query` |
-| `GET` | `/api/tickets/:ticket_id` | Get details and notes for one ticket. |
-| `PUT` | `/api/tickets/:ticket_id` | Update status or add note. Body: `{ status }` or `{ note_text }` |
-
-## 🌐 Deployment (Render)
-
-**Backend:**
-1. Create a "Web Service" pointing to the `backend` root folder.
-2. Build command: `npm install`
-3. Start command: `node server.js`
-4. Environment variables: `PORT=5000`
-
-**Frontend:**
-1. Create a "Static Site" pointing to the `frontend` root folder.
-2. Build command: `npm install && npm run build`
-3. Publish directory: `dist`
-4. Environment Variables: `VITE_API_URL=https://your-backend-url.onrender.com`
+datastraw_crm/
+├── backend/
+│   ├── db/            # SQLite database file and initialization logic
+│   ├── routes/        # Express API endpoints (/api/tickets)
+│   └── server.js      # Express server & middleware setup
+└── frontend/
+    ├── src/
+    │   ├── pages/     # Core React views (Home, CreateTicket, TicketDetailPage)
+    │   ├── App.jsx    # Client-side routing wrapper
+    │   └── main.jsx   # React DOM mounting
+    ├── vite.config.js # Proxy network configurations
+    └── package.json
