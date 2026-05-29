@@ -47,7 +47,6 @@ cd backend
 npm install
 npm run start
 ```
-The Express server will start on http://localhost:5000. The SQLite database (crm.db) will auto-generate upon initialization.
 
 ### 2. Initialize the Frontend
 Open a new terminal window and navigate to the frontend directory:
@@ -72,3 +71,13 @@ datastraw_crm/
     ├── vite.config.js # Proxy network configurations
     └── package.json
 ```
+## 🌐 Live Deployment Overview
+
+This application is deployed using a decoupled, serverless-friendly architecture.
+- **Frontend (Vercel):** https://datastraw-crm-tau.vercel.app/
+- **Backend API (Render):** https://datastraw-crm.onrender.com/
+
+### Deployment Architecture Notes for Evaluators
+
+* **Frontend:** Deployed as a static React application on Vercel. Network requests dynamically point to the backend via the `VITE_API_URL` environment variable.
+* **Backend:** Deployed as a Node.js Web Service on Render. Since `better-sqlite3` uses a local `.db` file, Render's localized ephemeral storage allows the app to run perfectly for testing and evaluation purposes.
