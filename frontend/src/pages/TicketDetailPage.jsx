@@ -288,7 +288,7 @@ function TicketDetailPage() {
                     Created At
                   </p>
                   <p className="text-slate-700 font-medium">
-                      {new Date(ticket.created_at).toLocaleString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit', hour12: true })}
+                      {new Date(ticket.created_at + 'Z').toLocaleString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit', hour12: true })}
                   </p>
                 </div>
                 <div className="bg-slate-50 p-4 rounded-xl border border-slate-100">
@@ -309,7 +309,7 @@ function TicketDetailPage() {
                     Last Updated
                   </p>
                   <p className="text-slate-700 font-medium">
-                      {new Date(ticket.updated_at).toLocaleString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit', hour12: true })}
+                      {new Date(ticket.updated_at + 'Z').toLocaleString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit', hour12: true })}
                   </p>
                 </div>
               </div>
@@ -431,7 +431,7 @@ function TicketDetailPage() {
                             d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
                           ></path>
                         </svg>
-                          {new Date(note.created_at).toLocaleString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit', hour12: true })}
+                          {new Date(note.created_at + 'Z').toLocaleString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit', hour12: true })}
                       </span>
                     </div>
                   </div>

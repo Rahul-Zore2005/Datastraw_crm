@@ -383,7 +383,7 @@ function Home() {
                       </span>
                     </td>
                     <td className="px-6 py-5 whitespace-nowrap text-sm text-slate-500 font-medium">
-                        {new Date(ticket.created_at).toLocaleDateString('en-GB')}
+                        {new Date(ticket.created_at + 'Z').toLocaleDateString('en-GB')}
                     </td>
                   </tr>
                 ))}
