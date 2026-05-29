@@ -58,7 +58,7 @@ npm run dev
 ```
 
 ## 📂 Core Folder Structure
-
+```
 datastraw_crm/
 ├── backend/
 │   ├── db/            # SQLite database file and initialization logic
@@ -71,3 +71,4 @@ datastraw_crm/
     │   └── main.jsx   # React DOM mounting
     ├── vite.config.js # Proxy network configurations
     └── package.json
+```
